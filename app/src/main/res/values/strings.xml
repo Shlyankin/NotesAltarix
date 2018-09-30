@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NotesAltarix</string>
+    <string name="delete_note">Delete</string>
+    <string name="create_note">Create new</string>
+    <string name="edit_note">Edit</string>
+    <string name="add_image">Add image</string>
+    <string name="save">Save</string>
+    <string name="close">Close</string>
+    <string name="back">Back</string>
+    <string name="share">Share</string>
+    <string name="writeFile">Write File</string>
+</resources>

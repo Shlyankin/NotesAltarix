@@ -1,0 +1,85 @@
+package com.example.user.notesaltarix;
+
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+
+import com.example.user.notesaltarix.adapters.NoteRecyclerAdapter;
+import com.example.user.notesaltarix.database.DBhelper;
+
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private FloatingActionButton addNote;
+    private RecyclerView notesRecyclerView;
+    private NoteRecyclerAdapter notesAdapter;
+    private ArrayList notes;
+    private DBhelper dBhelper;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        dBhelper = new DBhelper(this);
+
+        addNote = (FloatingActionButton)findViewById(R.id.addNote);
+        notesRecyclerView = (RecyclerView)findViewById(R.id.notesRecyclerView);
+        LinearLayoutManager LLmanager = new LinearLayoutManager(this);
+        notesRecyclerView.setLayoutManager(LLmanager);
+        notesRecyclerView.setHasFixedSize(true);
+        notesRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        notesRecyclerView.canScrollVertically(View.SCROLL_AXIS_VERTICAL);
+        notes = new ArrayList<>();
+        notesAdapter = new NoteRecyclerAdapter(notes, this);
+        notesRecyclerView.setAdapter(notesAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_note, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.createNoteItem:
+                onClick(addNote);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateNotesRecyclerView();
+    }
+
+    private void updateNotesRecyclerView() {
+        dBhelper.getAllNotes(notes);
+        notesAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.addNote:
+                Intent intent = new Intent(MainActivity.this, CreateNoteActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+}
