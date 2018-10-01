@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Parcelable;
 import android.provider.MediaStore;
@@ -19,7 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
@@ -37,6 +34,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * Activity создания заметок
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class CreateNoteActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FloatingActionButton addImageButton, addNoteButton;
@@ -114,8 +116,10 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /**
+     * Метод отправляет запрос в приложения-галереи и фото-приложения
+     */
     private void addPhoto() {
-
         //Проверяем разрешение на работу с камерой
         boolean isCameraPermissionGranted = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
         //Проверяем разрешение на работу с внешнем хранилещем телефона
@@ -175,7 +179,9 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
-    //Получаем абсолютный путь файла из Uri
+    /**
+     * @return абсолютный путь файла из URI
+     */
     private String getRealPathFromURI(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
         @SuppressWarnings("deprecation")
@@ -186,17 +192,16 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         return cursor.getString(columnIndex);
     }
 
-    /*
-      File storageDir -  абсолютный путь к каталогу конкретного приложения на
-      основном общем /внешнем устройстве хранения, где приложение может размещать
-      файлы кеша, которыми он владеет.
+    /**
+     * @param storageDir абсолютный путь к каталогу конкретного приложения на
+     * основном общем /внешнем устройстве хранения, где приложение может размещать
+     * файлы кеша, которыми он владеет.
      */
     public static File createTempImageFile(File storageDir) throws IOException {
-        // Генерируем имя файла
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());//получаем время
-        String imageFileName = "photo_" + timeStamp;//состовляем имя файла
+        // Генерируем имя файла по текущему времени
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+        String imageFileName = "photo_" + timeStamp;
         //Создаём файл
-
         return File.createTempFile(
                 imageFileName,  /* prefix */
                 ".jpg",         /* suffix */
@@ -204,8 +209,8 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
         );
     }
 
-    /*
-    Метод для добавления интента в лист интентов
+    /**
+    * Метод для добавления интента в лист интентов
     */
     public static List<Intent> addIntentsToList(Context context, List<Intent> list, Intent intent) {
         List<ResolveInfo> resInfo = context.getPackageManager().queryIntentActivities(intent, 0);

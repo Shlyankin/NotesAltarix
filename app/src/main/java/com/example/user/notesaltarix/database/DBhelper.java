@@ -11,6 +11,11 @@ import com.example.user.notesaltarix.adapters.Note;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс для работы с SQLite базой данных
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class DBhelper extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
@@ -22,6 +27,9 @@ public class DBhelper extends SQLiteOpenHelper {
     private static final String URI = "uri";
     private static final String IMPORTANT = "important";
 
+    /**
+     * Конструктор класса
+     * @param context context, из которого вызывается класс*/
     public DBhelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -41,6 +49,9 @@ public class DBhelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**Добавляет заметку в БД
+     *@param note добавляемая заметка
+     */
     public void addNote(Note note) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -52,6 +63,10 @@ public class DBhelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Получить заметку
+     * @param id уникальный номер возвращаемой заметки
+     */
     public Note getNote(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(TABLE_NOTES, new String[] { KEY_ID,
@@ -64,6 +79,10 @@ public class DBhelper extends SQLiteOpenHelper {
         return new Note(cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getInt(0), cursor.getInt(4));
     }
 
+    /**
+     * Получить все заметки из базы данных
+     * @param notesList структура, в которую записываются заметки
+     */
     public void getAllNotes(List <Note> notesList) {
         notesList.clear();
         String selectQuery = "SELECT  * FROM " + TABLE_NOTES;
@@ -77,6 +96,11 @@ public class DBhelper extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * Обновляет заметку в БД
+     * @param updNote обновленный класс заметки
+     * @param id уникальный номер обновляемой заметки
+     */
     public void updateNote(Note updNote, int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -88,18 +112,28 @@ public class DBhelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Удалить заметку
+     * @param id уникальный номер удаляемой заметки
+     */
     public void deleteNote(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NOTES, KEY_ID + " = ?", new String[] { String.valueOf(id) });
         db.close();
     }
 
+    /**
+     * Удалить базу данных
+     */
     public void deleteAll() {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NOTES, null, null);
         db.close();
     }
 
+    /**
+     * @return количество заметок в БД
+     */
     public int getNotesCount() {
         String countQuery = "SELECT  * FROM " + TABLE_NOTES;
         SQLiteDatabase db = this.getReadableDatabase();

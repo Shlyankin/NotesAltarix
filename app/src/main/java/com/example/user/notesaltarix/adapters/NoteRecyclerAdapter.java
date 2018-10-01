@@ -19,11 +19,20 @@ import com.example.user.notesaltarix.R;
 
 import java.util.List;
 
+/**
+ * Адаптер Recycler View для класса Note. Реализован стандартные методы адаптера для Recycler View.
+ * @author Николай Шлянкин
+ * @version 1
+ */
 public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapter.NoteViewHolder> {
 
     private List<Note> notes;
     private Context context;
 
+    /**Конструктор для адаптера
+     * @param notes ссылка на структуру, где хранятся заметки
+     * @param context context из которого вызывается
+     */
     public NoteRecyclerAdapter(List<Note> notes, Context context) {
         this.notes = notes;
         this.context = context;
@@ -73,6 +82,7 @@ public class NoteRecyclerAdapter extends RecyclerView.Adapter<NoteRecyclerAdapte
         }
     }
 
+    /**@return количество элементов в адаптере*/
     @Override
     public int getItemCount() {
         return notes.size();

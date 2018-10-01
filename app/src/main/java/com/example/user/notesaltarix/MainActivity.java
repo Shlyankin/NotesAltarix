@@ -10,14 +10,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 
 import com.example.user.notesaltarix.adapters.NoteRecyclerAdapter;
 import com.example.user.notesaltarix.database.DBhelper;
 
 import java.util.ArrayList;
 
+/**
+ * основное Activity, в котором представлены все заметки
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private FloatingActionButton addNote;
@@ -47,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_note, menu);
+        getMenuInflater().inflate(R.menu.menu_main_activity, menu);
         return true;
     }
 
@@ -68,6 +71,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         updateNotesRecyclerView();
     }
 
+    /**
+     * Обновляет элементы в Recycler View
+     */
     private void updateNotesRecyclerView() {
         dBhelper.getAllNotes(notes);
         notesAdapter.notifyDataSetChanged();
