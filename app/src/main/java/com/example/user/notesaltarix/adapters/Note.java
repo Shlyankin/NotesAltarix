@@ -2,11 +2,21 @@ package com.example.user.notesaltarix.adapters;
 
 import android.net.Uri;
 
+/**
+ * Класс записка. Хранит основную информацию о записке.
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class Note {
+    /**Уникальный номер записки*/
     private int id;
+    /**URI изображения, если не инициилизировано, то пустая строка*/
     private String uri;
+    /**Заголовок заметки*/
     private String tittle;
+    /**Текст записки*/
     private String data;
+    /**Степень важности записки*/
     private int important;
 
     public Note() {
@@ -41,29 +51,18 @@ public class Note {
 
     public int getImportant() { return important; }
 
-    public String getData() {
-        return data;
-    }
+    public String getData() { return data; }
 
-    public String getTittle() {
-        return tittle;
-    }
+    public String getTittle() { return tittle; }
 
-    public String getUri() {
-        return uri;
-    }
-
-    public void setData(String data) {
-        this.data = data;
-    }
-
-    public void setTittle(String tittle) {
-        this.tittle = tittle;
-    }
-
-    public void setUri(String uri) {
-        this.uri = uri;
-    }
+    public String getUri() { return uri; }
 
     public int getId() { return id; }
+
+    public void setData(String data) { this.data = data; }
+
+    public void setTittle(String tittle) { this.tittle = tittle; }
+
+    public void setUri(String uri) { this.uri = uri; }
+
 }

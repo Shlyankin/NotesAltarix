@@ -1,11 +1,8 @@
 package com.example.user.notesaltarix;
 
 import android.app.AlertDialog;
-import android.app.Application;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -13,28 +10,28 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.user.notesaltarix.adapters.Note;
 import com.example.user.notesaltarix.database.DBhelper;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+/**
+ * Activity, в котором отображена вся информация о выбранной записке
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class NoteActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView imageView;
@@ -81,7 +78,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_edit_note, menu);
+        getMenuInflater().inflate(R.menu.menu_note_activity, menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         return true;
@@ -187,7 +184,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             }).show();
                 } else {
-                    Toast.makeText(this, "Note is not deleted. Try again later...", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Note is not deleted. Try again later...", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

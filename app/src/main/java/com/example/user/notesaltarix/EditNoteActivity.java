@@ -19,7 +19,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -37,7 +36,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-
+/**
+ * Activity редактирования заметок заметок
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class EditNoteActivity extends AppCompatActivity implements View.OnClickListener{
     private FloatingActionButton changeImageButton, editNoteButton;
     private EditText tittleView, dataView;
@@ -115,7 +118,7 @@ public class EditNoteActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_for_create_and_edit_activity, menu);
+        getMenuInflater().inflate(R.menu.menu_create_edit_activity, menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         return true;
@@ -137,8 +140,10 @@ public class EditNoteActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
+    /**
+     * Метод отправляет запрос в приложения-галереи и фото-приложения
+     */
     private void addPhoto() {
-
         //Проверяем разрешение на работу с камерой
         boolean isCameraPermissionGranted = ActivityCompat.checkSelfPermission(this, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED;
         //Проверяем разрешение на работу с внешнем хранилещем телефона
@@ -198,7 +203,9 @@ public class EditNoteActivity extends AppCompatActivity implements View.OnClickL
         }
     }
 
-    //Получаем абсолютный путь файла из Uri
+    /**
+     * @return абсолютный путь файла из URI
+     */
     private String getRealPathFromURI(Uri uri) {
         String[] projection = { MediaStore.Images.Media.DATA };
         @SuppressWarnings("deprecation")
@@ -209,10 +216,10 @@ public class EditNoteActivity extends AppCompatActivity implements View.OnClickL
         return cursor.getString(columnIndex);
     }
 
-    /*
-      File storageDir -  абсолютный путь к каталогу конкретного приложения на
-      основном общем /внешнем устройстве хранения, где приложение может размещать
-      файлы кеша, которыми он владеет.
+    /**
+     * @param storageDir абсолютный путь к каталогу конкретного приложения на
+     * основном общем /внешнем устройстве хранения, где приложение может размещать
+     * файлы кеша, которыми он владеет.
      */
     public static File createTempImageFile(File storageDir) throws IOException {
         // Генерируем имя файла
@@ -227,9 +234,9 @@ public class EditNoteActivity extends AppCompatActivity implements View.OnClickL
         );
     }
 
-    /*
-    Метод для добавления интента в лист интентов
-    */
+    /**
+     * Метод для добавления интента в лист интентов
+     */
     public static List<Intent> addIntentsToList(Context context, List<Intent> list, Intent intent) {
         List<ResolveInfo> resInfo = context.getPackageManager().queryIntentActivities(intent, 0);
         for (ResolveInfo resolveInfo : resInfo) {

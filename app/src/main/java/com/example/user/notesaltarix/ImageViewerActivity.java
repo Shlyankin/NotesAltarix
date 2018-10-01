@@ -5,14 +5,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.github.chrisbanes.photoview.PhotoView;
-import com.github.chrisbanes.photoview.PhotoViewAttacher;
 
+/**
+ * Activity для зуминга и скролинга изображения из Activity заметки
+ * @author Николай Шлянкин
+ * @version 1.0
+ */
 public class ImageViewerActivity extends AppCompatActivity {
 
     private String uriString = "";
@@ -33,7 +34,7 @@ public class ImageViewerActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_image_viewer, menu);
+        getMenuInflater().inflate(R.menu.menu_image_viewer_activity, menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         return true;
