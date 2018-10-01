@@ -184,7 +184,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                                 }
                             }).show();
                 } else {
-                    Toast.makeText(this, "Note is not deleted. Try again later...", Toast.LENGTH_LONG);
+                    Toast.makeText(this, "Note is not deleted. Try again later...", Toast.LENGTH_LONG).show();
                 }
                 break;
         }
