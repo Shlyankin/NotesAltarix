@@ -94,7 +94,7 @@ public class CreateNoteActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_for_create_and_edit_activity, menu);
+        getMenuInflater().inflate(R.menu.menu_create_edit_activity, menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         return true;
